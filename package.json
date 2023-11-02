@@ -1,8 +1,8 @@
 {
-  "name": "polaris-chip",
-  "description": "Webcomponent polaris-chip following open-wc recommendations",
+  "name": "tv-app",
+  "description": "Webcomponent tv-app following open-wc recommendations",
   "license": "MIT",
-  "author": "polaris-chip",
+  "author": "tv-app",
   "version": "0.0.0",
   "scripts": {
     "test": "web-test-runner --coverage",
@@ -15,9 +15,11 @@
     "start": "web-dev-server"
   },
   "dependencies": {
-    "lit": "^2.0.2"
+    "lit": "3.0.1",
+    "@shoelace-style/shoelace": "2.11.2"
   },
   "devDependencies": {
+    "rollup-plugin-copy": "3.5.0",
     "@babel/preset-env": "^7.16.4",
     "@custom-elements-manifest/analyzer": "^0.4.17",
     "@open-wc/building-rollup": "^2.0.1",
