@@ -224,7 +224,7 @@ export class TvApp extends LitElement {
     }
     changedProperties.forEach((oldValue, propName) => {
       if (propName === "source" && this[propName]) {
-        this.updateSourceData(this[propName]);
+        this.updateListings(this[propName]);
       }
       if(propName === "activeIndex"){
         console.log(this.shadowRoot.querySelectorAll("tv-channel"));
@@ -234,7 +234,7 @@ export class TvApp extends LitElement {
     }, 1000);
   }
 
-  async updateSourceData(source) {
+  async updateListings(source) {
     await fetch(source).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
         this.listings = [...responseData.data.items];
