@@ -79,13 +79,21 @@ export class TvApp extends LitElement {
         .slideclicker {
           display: flex;
           flex-direction: row;
-          justify-content: space-around;
           align-items: center;
           margin-top: 20px;
           margin-bottom: 10px;
         }
 
-        .previous-slide,
+        .previous-slide {
+          font-size: 18px;
+          width: 120px;
+          height: 40px;
+          background-color: #3498db;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
         .next-slide {
           font-size: 18px;
           width: 120px;
@@ -135,17 +143,18 @@ export class TvApp extends LitElement {
     <div class="container">
       <div class="grid-item">
         <div class="left-item">
-          <video-player source="https://www.youtube.com/watch?v=sXnoQdA6cYM" accent-color="yellow" dark track="https://haxtheweb.org/files/HAXshort.vtt"></video-player>
+          <video-player source="https://www.youtube.com/embed/sXnoQdA6cYM" accent-color="yellow" dark track="https://haxtheweb.org/files/HAXshort.vtt"></video-player>
     </div>
     <tv-channel title="Top 10 Best Video Games of 2023" presenter="WatchMojo.com">
       ${this.listings.length > 0 ? this.listings[this.activeIndex].description : ''}
     </tv-channel>
   </div>
+  </div>
   <div class="right-item">
     <h2>${this.name}</h2>
       ${
         this.listings.map(
-          (item) => html`
+          (item, index) => html`
             <tv-channel 
               title="${item.title}"
               presenter="${item.metadata.author}"
@@ -173,7 +182,7 @@ export class TvApp extends LitElement {
 
       <div class="slider">
         <button class="previous-slide" @click="${this.previousSlide}">Previous Slide</button>
-        <button class="next-slide" @Click="${this.nextSlide}">Next Slide</button>
+        <button class="next-slide" @click="${this.nextSlide}">Next Slide</button>
     </div>
     </div>
     `;
@@ -187,7 +196,7 @@ export class TvApp extends LitElement {
   itemClick(e) {
     console.log(e.target);
     const dialog = this.shadowRoot.querySelector('.dialog');
-    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('ally-media-player').play();
+    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play();
   }
 
   previousSlide() {
@@ -202,7 +211,7 @@ export class TvApp extends LitElement {
     super.connectedCallback();
 
     setInterval(() => {
-      const currentTime = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('ally-media-player').media.currentTime;
+      const currentTime = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media.currentTime;
       if(this.activeIndex + 1 < this.listings.length && currentTime >= this.listings[this.activeIndex + 1].metadata.timecode) {this.activeIndex++;
       }
     })
